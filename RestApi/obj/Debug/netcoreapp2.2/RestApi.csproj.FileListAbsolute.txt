@@ -1,0 +1,14 @@
+C:\Users\grefi\source\repos\RestApi\RestApi\bin\Debug\netcoreapp2.2\RestApi.deps.json
+C:\Users\grefi\source\repos\RestApi\RestApi\bin\Debug\netcoreapp2.2\RestApi.runtimeconfig.json
+C:\Users\grefi\source\repos\RestApi\RestApi\bin\Debug\netcoreapp2.2\RestApi.runtimeconfig.dev.json
+C:\Users\grefi\source\repos\RestApi\RestApi\bin\Debug\netcoreapp2.2\RestApi.dll
+C:\Users\grefi\source\repos\RestApi\RestApi\bin\Debug\netcoreapp2.2\RestApi.pdb
+C:\Users\grefi\source\repos\RestApi\RestApi\obj\Debug\netcoreapp2.2\RestApi.csprojAssemblyReference.cache
+C:\Users\grefi\source\repos\RestApi\RestApi\obj\Debug\netcoreapp2.2\RestApi.csproj.CoreCompileInputs.cache
+C:\Users\grefi\source\repos\RestApi\RestApi\obj\Debug\netcoreapp2.2\RestApi.RazorAssemblyInfo.cache
+C:\Users\grefi\source\repos\RestApi\RestApi\obj\Debug\netcoreapp2.2\RestApi.RazorAssemblyInfo.cs
+C:\Users\grefi\source\repos\RestApi\RestApi\obj\Debug\netcoreapp2.2\RestApi.AssemblyInfoInputs.cache
+C:\Users\grefi\source\repos\RestApi\RestApi\obj\Debug\netcoreapp2.2\RestApi.AssemblyInfo.cs
+C:\Users\grefi\source\repos\RestApi\RestApi\obj\Debug\netcoreapp2.2\RestApi.RazorTargetAssemblyInfo.cache
+C:\Users\grefi\source\repos\RestApi\RestApi\obj\Debug\netcoreapp2.2\RestApi.dll
+C:\Users\grefi\source\repos\RestApi\RestApi\obj\Debug\netcoreapp2.2\RestApi.pdb
