@@ -8,7 +8,6 @@ namespace RestApi.Models
 {
     public class ToDoContext : DbContext
     {
-        private readonly MyOptions _options;
         public DbSet<Category> Categories { get; set; }
         public DbSet<Goal> Goals { get; set; }
         public ToDoContext() {

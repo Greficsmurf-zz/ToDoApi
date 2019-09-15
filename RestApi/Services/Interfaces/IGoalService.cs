@@ -1,4 +1,7 @@
-﻿using RestApi.Models;
+﻿
+using Microsoft.AspNetCore.Http;
+using RestApi.Models;
+using RestApi.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +21,9 @@ namespace RestApi.Services.Interfaces
 
         Task DeleteAsync(long Id);
         Task DeleteAsync(string Name);
+        Task UploadFile(long Id,IFormFile file);
+        Task UploadFile(string Name, IFormFile file);
+
 
     }
 }

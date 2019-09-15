@@ -61,6 +61,7 @@ namespace RestApi.Services
             var oldCategory = await _categoryRepository.FindByIdAsync(Id);
             oldCategory.Name = category.Name;
             oldCategory.Description = category.Description;
+            oldCategory.Goal = category.Goal;
             _categoryRepository.Update(category);
             await _unitOfWork.CompleteAsync();
         }
@@ -69,6 +70,8 @@ namespace RestApi.Services
             var oldCategory = await FindByNameAsync(Name);
             oldCategory.Name = category.Name;
             oldCategory.Description = category.Description;
+            oldCategory.Goal = category.Goal;
+
             _categoryRepository.Update(category);
             await _unitOfWork.CompleteAsync();
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -23,7 +24,7 @@ namespace RestApi.Controllers
             _context = context;
             _goalService = goalService;
             _unitOfWork = unitOfWork;
-            
+
         }
         // GET: api/Goal
         [HttpGet]
@@ -108,6 +109,31 @@ namespace RestApi.Controllers
             try
             {
                 await _goalService.DeleteAsync(Name);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+        [HttpPost("{Id}/upload")]
+        public async Task<IActionResult> UploadAsync(long Id, IFormFile file)
+        {
+            try
+            {
+                await _goalService.UploadFile(Id, file);
+                return Ok();
+            }
+            catch (Exception ex) {
+                return BadRequest();
+            }
+        }
+        [HttpPost("upload/name/{Name}")]
+        public async Task<IActionResult> UploadAsync(string Name, IFormFile file)
+        {
+            try
+            {
+                await _goalService.UploadFile(Name, file);
                 return Ok();
             }
             catch (Exception ex)

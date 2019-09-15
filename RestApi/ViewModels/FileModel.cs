@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RestApi.Models
+namespace RestApi.ViewModels
 {
-    public class ViewModel
+    public class FileModel
     {
-        public IFormFile File { get; set; }
+        public IFormFile formFile { get; set; }
     }
 }

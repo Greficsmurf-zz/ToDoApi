@@ -28,7 +28,7 @@ namespace RestApi.Repositories
 
         public async Task<IEnumerable<Goal>> ListAsync()
         {
-            return await Task.Run(() =>  _context.Goals.Include(goal => goal.Category).ToList());
+            return await Task.Run(() =>  _context.Goals.ToList());
         }
 
         public void Update(Goal goal)

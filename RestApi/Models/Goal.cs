@@ -15,7 +15,8 @@ namespace RestApi.Models
         public string Description { get; set; }
         public Byte[] File { get; set; }
         public DateTime EndDate { get; set; }
-        public virtual Category Category { get; set; }
+        [ForeignKey("CategoryId")]
+        public long CategoryId { get; set; }
         public string Status { get; set; }
     }
 }
