@@ -64,7 +64,7 @@ namespace RestApi.Controllers
                 return BadRequest();
             }
         }
-        [HttpDelete("{id}")]
+        [HttpDelete("id/{Id}")]
         public async Task<IActionResult> DeleteAsync(long Id)
         {
             try
@@ -89,7 +89,7 @@ namespace RestApi.Controllers
                 return BadRequest();
             }
         }
-        [HttpPut("{id}")]
+        [HttpPut("id/{Id}")]
         public async Task<IActionResult> Update(long Id,[FromBody] Category newCategory)
         {
             try
@@ -98,6 +98,19 @@ namespace RestApi.Controllers
                 return Ok();
             }
             catch (Exception ex) {
+                return BadRequest();
+            }
+        }
+        [HttpPut("name/{Name}")]
+        public async Task<IActionResult> Update(string Name, [FromBody] Category newCategory)
+        {
+            try
+            {
+                await _categoryService.UpdateAsync(Name, newCategory);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
                 return BadRequest();
             }
         }

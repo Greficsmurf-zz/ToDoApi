@@ -33,10 +33,17 @@ namespace RestApi.Controllers
         }
 
         // GET: api/Goal/5
-        [HttpGet("{id}")]
+        [HttpGet("id/{Id}")]
         public async Task<ActionResult<Goal>> Get(long Id)
         {
             var item = await _goalService.FindByIdAsync(Id);
+            if (item == null) return NotFound();
+            return item;
+        }
+        [HttpGet("name/{Name}")]
+        public async Task<ActionResult<Goal>> Get(string Name)
+        {
+            var item = await _goalService.FindByNameAsync(Name);
             if (item == null) return NotFound();
             return item;
         }
@@ -56,7 +63,7 @@ namespace RestApi.Controllers
         }
 
         // PUT: api/Goal/5
-        [HttpPut("{id}")]
+        [HttpPut("id/{Id}")]
         public async Task<IActionResult> Put(long Id, [FromBody] Goal newGoal)
         {
             try
@@ -68,9 +75,22 @@ namespace RestApi.Controllers
                 return BadRequest();
             }
         }
+        [HttpPut("name/{Name}")]
+        public async Task<IActionResult> Put(String Name, [FromBody] Goal newGoal)
+        {
+            try
+            {
+                await _goalService.UpdateAsync(Name, newGoal);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
 
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
+        [HttpDelete("id/{Id}")]
         public async Task<IActionResult> Delete(long Id)
         {
             try
@@ -79,6 +99,19 @@ namespace RestApi.Controllers
                 return Ok();
             }
             catch (Exception ex) {
+                return BadRequest();
+            }
+        }
+        [HttpDelete("name/{Name}")]
+        public async Task<IActionResult> Delete(string Name)
+        {
+            try
+            {
+                await _goalService.DeleteAsync(Name);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
                 return BadRequest();
             }
         }
