@@ -42,6 +42,8 @@ namespace RestApi
             services.AddScoped<IGoalRepository, GoalRepository>();
 
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IGoalService, GoalService>();
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 

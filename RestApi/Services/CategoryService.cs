@@ -11,24 +11,66 @@ namespace RestApi.Services
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
-        public CategoryService(ICategoryRepository categoryRepository) {
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly ToDoContext _context;
+        public CategoryService(ICategoryRepository categoryRepository, IUnitOfWork unitOfWork, ToDoContext context) {
             _categoryRepository = categoryRepository;
+            _unitOfWork = unitOfWork;
+            _context = context;
         }
 
-        public Task<IActionResult> CategoryPost(Category category)
+        public async Task AddAsync(Category category)
         {
-            throw new NotImplementedException();
+            await _categoryRepository.AddAsync(category);
+            await _unitOfWork.CompleteAsync();
         }
 
-        public Task<Category> FindCategoryById(int Id)
+        public async Task DeleteAsync(long Id)
         {
-
-            throw new NotImplementedException();
+            var category = await _categoryRepository.FindByIdAsync(Id);
+            _categoryRepository.Delete(category);
+            await _unitOfWork.CompleteAsync();
+        }
+        public async Task DeleteAsync(string Name)
+        {
+            var category = await FindByNameAsync(Name);
+            _categoryRepository.Delete(category);
+            await _unitOfWork.CompleteAsync();
         }
 
-        public Task<IEnumerable<Category>> ListAsync()
+        public async Task<Category> FindByIdAsync(long Id)
         {
-            throw new NotImplementedException();
+            return await _categoryRepository.FindByIdAsync(Id);
+        }
+        public async Task<Category> FindByNameAsync(string Name)
+        {
+            var list = await _categoryRepository.ListAsync();
+            foreach (var i in list) {
+                if (i.Name == Name) return i;
+            }
+            return null;
+        }
+
+        public async Task<IEnumerable<Category>> ListAsync()
+        {
+            return await _categoryRepository.ListAsync();
+        }
+
+        public async Task UpdateAsync(long Id, Category category)
+        {
+            var oldCategory = await _categoryRepository.FindByIdAsync(Id);
+            oldCategory.Name = category.Name;
+            oldCategory.Description = category.Description;
+            _categoryRepository.Update(category);
+            await _unitOfWork.CompleteAsync();
+        }
+        public async Task UpdateAsync(string Name, Category category)
+        {
+            var oldCategory = await FindByNameAsync(Name);
+            oldCategory.Name = category.Name;
+            oldCategory.Description = category.Description;
+            _categoryRepository.Update(category);
+            await _unitOfWork.CompleteAsync();
         }
     }
 }

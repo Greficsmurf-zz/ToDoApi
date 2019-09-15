@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.EntityFrameworkCore;
 using RestApi.Models;
 using RestApi.Repositories.Interfaces;
 using RestApi.Services.Interfaces;
@@ -15,30 +15,40 @@ namespace RestApi.Controllers
     public class ValuesController : ControllerBase
     {
         private readonly ToDoContext _context;
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly ICategoryService _categoryService;
         private readonly IUnitOfWork _unitOfWork;
 
-        public ValuesController(ToDoContext context, ICategoryRepository categoryRepository, IUnitOfWork unitOfWork) {
+        public ValuesController(ToDoContext context, ICategoryService categoryService, IUnitOfWork unitOfWork) {
             _context = new ToDoContext();
-            _categoryRepository = categoryRepository;
+            _categoryService = categoryService;
             _unitOfWork = unitOfWork;
-
+            
         }
         // GET api/values
         [HttpGet]
         public async Task<IEnumerable<Category>> Get()
         {
-            return await _categoryRepository.ListAsync();
+            return await _categoryService.ListAsync();
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Category>> Get(long id)
+        [HttpGet("id/{id}")]
+        public async Task<ActionResult<Category>> Get(long Id)
         {
-            var Table = await _context.Categories.FindAsync(id);
+            var Table = await _categoryService.FindByIdAsync(Id);
             if (Table == null) return NotFound();
             return Table;
         }
+
+
+        [HttpGet("name/{Name}")]
+        public async Task<ActionResult<Category>> Get(string Name)
+        {
+            var name = await _categoryService.FindByNameAsync(Name);
+            if (name == null) return NotFound();
+            return name;
+        }
+
 
         // POST api/values
         [HttpPost]
@@ -47,8 +57,7 @@ namespace RestApi.Controllers
         {
             try
             {
-                await _categoryRepository.AddAsync(category);
-                await _unitOfWork.CompleteAsync();
+                await _categoryService.AddAsync(category);
                 return Ok();
             }
             catch (Exception ex) {
@@ -60,12 +69,23 @@ namespace RestApi.Controllers
         {
             try
             {
-                var category = await _categoryRepository.FindByIdAsync(Id);
-                _categoryRepository.Delete(category);
-                await _unitOfWork.CompleteAsync();
+                await _categoryService.DeleteAsync(Id);
                 return Ok();
             }
             catch (Exception ex) {
+                return BadRequest();
+            }
+        }
+        [HttpDelete("name/{Name}")]
+        public async Task<IActionResult> DeleteAsync(string Name)
+        {
+            try
+            {
+                await _categoryService.DeleteAsync(Name);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
                 return BadRequest();
             }
         }
@@ -74,10 +94,7 @@ namespace RestApi.Controllers
         {
             try
             {
-                var category = await _categoryRepository.FindByIdAsync(Id);
-                category.Name = newCategory.Name;
-                _categoryRepository.Update(category);
-                await _unitOfWork.CompleteAsync();
+                await _categoryService.UpdateAsync(Id, newCategory);
                 return Ok();
             }
             catch (Exception ex) {

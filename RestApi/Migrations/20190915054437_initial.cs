@@ -36,12 +36,18 @@ namespace RestApi.Migrations
                     Description = table.Column<string>(maxLength: 1000, nullable: true),
                     File = table.Column<byte[]>(nullable: true),
                     EndDate = table.Column<DateTime>(nullable: false),
-                    Category = table.Column<string>(nullable: true),
+                    CategoryId = table.Column<long>(nullable: true),
                     Status = table.Column<string>(maxLength: 250, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Goal", x => x.TaskId);
+                    table.ForeignKey(
+                        name: "FK_Goal_Category_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Category",
+                        principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
@@ -49,19 +55,24 @@ namespace RestApi.Migrations
                 columns: new[] { "CategoryId", "Description", "Name" },
                 values: new object[,]
                 {
-                    { 10L, "Goal which require fast resolvement", "Hight priority" },
-                    { 20L, "Goal which can be done later", "Medium priority" },
-                    { 30L, "Optional Goal", "Low priority" }
+                    { 1L, "Goal which require fast resolvement", "Hight priority" },
+                    { 2L, "Goal which can be done later", "Medium priority" },
+                    { 3L, "Optional Goal", "Low priority" }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Goal_CategoryId",
+                table: "Goal",
+                column: "CategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Category");
+                name: "Goal");
 
             migrationBuilder.DropTable(
-                name: "Goal");
+                name: "Category");
 
             migrationBuilder.DropSequence(
                 name: "HiLoSequence");

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RestApi.Models;
 using RestApi.Repositories.Interfaces;
 using RestApi.Services.Interfaces;
@@ -15,26 +16,27 @@ namespace RestApi.Controllers
     public class GoalController : ControllerBase
     {
         private readonly ToDoContext _context;
-        private readonly IGoalRepository _goalRepository;
+        private readonly IGoalService _goalService;
         private readonly IUnitOfWork _unitOfWork;
 
-        public GoalController(ToDoContext context, IGoalRepository goalRepository, IUnitOfWork unitOfWork) {
+        public GoalController(ToDoContext context, IGoalService goalService, IUnitOfWork unitOfWork) {
             _context = context;
-            _goalRepository = goalRepository;
+            _goalService = goalService;
             _unitOfWork = unitOfWork;
+            
         }
         // GET: api/Goal
         [HttpGet]
         public async Task<IEnumerable<Goal>> Get()
         {
-            return await _goalRepository.ListAsync();
+            return await _goalService.ListAsync();
         }
 
         // GET: api/Goal/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Goal>> Get(long Id)
         {
-            var item = await _goalRepository.FindByIdAsync(Id);
+            var item = await _goalService.FindByIdAsync(Id);
             if (item == null) return NotFound();
             return item;
         }
@@ -45,8 +47,7 @@ namespace RestApi.Controllers
         {
             try
             {
-                await _goalRepository.AddAsync(goal);
-                await _unitOfWork.CompleteAsync();
+                await _goalService.AddAsync(goal);
                 return Ok();
             }
             catch (Exception ex) {
@@ -60,10 +61,7 @@ namespace RestApi.Controllers
         {
             try
             {
-                var oldGoal = await _goalRepository.FindByIdAsync(Id);
-                oldGoal.Name = newGoal.Name;
-                _goalRepository.Update(oldGoal);
-                await _unitOfWork.CompleteAsync();
+                await _goalService.UpdateAsync(Id, newGoal);
                 return Ok();
             }
             catch (Exception ex) {
@@ -77,9 +75,7 @@ namespace RestApi.Controllers
         {
             try
             {
-                var goal = await _goalRepository.FindByIdAsync(Id);
-                _goalRepository.Delete(goal);
-                await _unitOfWork.CompleteAsync();
+                await _goalService.DeleteAsync(Id);
                 return Ok();
             }
             catch (Exception ex) {

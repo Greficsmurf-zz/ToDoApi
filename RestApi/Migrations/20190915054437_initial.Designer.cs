@@ -10,7 +10,7 @@ using RestApi.Models;
 namespace RestApi.Migrations
 {
     [DbContext(typeof(ToDoContext))]
-    [Migration("20190914082536_initial")]
+    [Migration("20190915054437_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,19 +41,19 @@ namespace RestApi.Migrations
                     b.HasData(
                         new
                         {
-                            CategoryId = 10L,
+                            CategoryId = 1L,
                             Description = "Goal which require fast resolvement",
                             Name = "Hight priority"
                         },
                         new
                         {
-                            CategoryId = 20L,
+                            CategoryId = 2L,
                             Description = "Goal which can be done later",
                             Name = "Medium priority"
                         },
                         new
                         {
-                            CategoryId = 30L,
+                            CategoryId = 3L,
                             Description = "Optional Goal",
                             Name = "Low priority"
                         });
@@ -64,7 +64,7 @@ namespace RestApi.Migrations
                     b.Property<long>("TaskId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Category");
+                    b.Property<long?>("CategoryId");
 
                     b.Property<string>("Description")
                         .HasMaxLength(1000);
@@ -82,7 +82,16 @@ namespace RestApi.Migrations
 
                     b.HasKey("TaskId");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Goal");
+                });
+
+            modelBuilder.Entity("RestApi.Models.Goal", b =>
+                {
+                    b.HasOne("RestApi.Models.Category", "Category")
+                        .WithMany("Goal")
+                        .HasForeignKey("CategoryId");
                 });
 #pragma warning restore 612, 618
         }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Microsoft.EntityFrameworkCore;
 using RestApi.Models;
 using RestApi.Repositories.Interfaces;
 namespace RestApi.Repositories
@@ -16,8 +16,6 @@ namespace RestApi.Repositories
             await _context.Categories.AddAsync(category);
             
         }
-
-      
 
         public void Delete(Category category)
         {

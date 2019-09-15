@@ -1,4 +1,5 @@
-﻿using RestApi.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using RestApi.Models;
 using RestApi.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace RestApi.Repositories
 
         public async Task<IEnumerable<Goal>> ListAsync()
         {
-            return await Task.Run(() =>  _context.Goals.ToList());
+            return await Task.Run(() =>  _context.Goals.Include(goal => goal.Category).ToList());
         }
 
         public void Update(Goal goal)

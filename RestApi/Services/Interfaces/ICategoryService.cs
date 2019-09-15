@@ -9,11 +9,16 @@ namespace RestApi.Services.Interfaces
 {
     public interface ICategoryService
     {
-       
-        Task<Category> FindCategoryById(int Id);
+
         Task<IEnumerable<Category>> ListAsync();
+        Task<Category> FindByIdAsync(long Id);
+        Task<Category> FindByNameAsync(string Name);
 
-        Task<IActionResult> CategoryPost(Category category);
+        Task AddAsync(Category category);
+        Task UpdateAsync(long Id, Category category);
+        Task UpdateAsync(string Name, Category category);
 
+        Task DeleteAsync(long Id);
+        Task DeleteAsync(string Name);
     }
 }
