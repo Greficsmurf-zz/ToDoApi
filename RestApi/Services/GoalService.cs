@@ -25,7 +25,7 @@ namespace RestApi.Services
         }
         public async Task AddAsync(Goal goal)
         {
-
+            if (goal.EndDate < DateTime.Now) throw new Exception();
             await _goalRepository.AddAsync(goal);
             await _unitOfWork.CompleteAsync();
         }
@@ -68,6 +68,7 @@ namespace RestApi.Services
 
         public async Task UpdateAsync(long Id, Goal goal)
         {
+            if (goal.EndDate < DateTime.Now) throw new Exception();
             var oldGoal = await _goalRepository.FindByIdAsync(Id);
             oldGoal.Name = goal.Name;
             oldGoal.Description = goal.Description;
@@ -81,6 +82,7 @@ namespace RestApi.Services
 
         public async Task UpdateAsync(string Name, Goal goal)
         {
+            if (goal.EndDate < DateTime.Now) throw new Exception();
             var oldGoal = await FindByNameAsync(Name);
             oldGoal.Name = goal.Name;
             oldGoal.Description = goal.Description;
