@@ -8,8 +8,8 @@ RestApi для ToDoList
 
 ### Перед запуском в корне проекта запустить следующее
 
-dotnet ef migrations add InitialCreate
-dotnet ef database update
+* dotnet ef migrations add InitialCreate
+* dotnet ef database update
 
 ### Запросы
 
