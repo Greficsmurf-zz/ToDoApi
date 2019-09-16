@@ -13,19 +13,19 @@ RestApi для ToDoList
 
 ### Запросы
 
-GET api/goals -- вывод всех задач
-GET api/goals/name/{Name} -- вывод задачи по ее имени
-GET api/goals/id/{Id} -- вывод задачи по ее id
+* GET api/goals -- вывод всех задач
+* GET api/goals/name/{Name} -- вывод задачи по ее имени
+* GET api/goals/id/{Id} -- вывод задачи по ее id
 
-POST api/goals -- загрузка задачи
-POST api/goals/upload/name/{Name} -- загрузка файла в задачу по ее имени в виде IFormFie
-POST api/goals/upload/id/{Id} -- загрузка файла в задачу по ее id в виде IFormFie
+* POST api/goals -- загрузка задачи
+* POST api/goals/upload/name/{Name} -- загрузка файла в задачу по ее имени в виде IFormFie
+* POST api/goals/upload/id/{Id} -- загрузка файла в задачу по ее id в виде IFormFie
 
-Delete api/goals/name/{Name} -- удаление задачи по имени
-Delete api/goals/id/{Id} -- удаление задачи по id
+* Delete api/goals/name/{Name} -- удаление задачи по имени
+* Delete api/goals/id/{Id} -- удаление задачи по id
 
-PUT api/goals/name/{Name} -- обновление задачи по имени
-PUT api/goals/id/{Id} -- обновление задачи по id
+* PUT api/goals/name/{Name} -- обновление задачи по имени
+* PUT api/goals/id/{Id} -- обновление задачи по id
 
 минимальный вид goal: 
 
