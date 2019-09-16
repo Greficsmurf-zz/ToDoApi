@@ -116,7 +116,7 @@ namespace RestApi.Controllers
                 return BadRequest();
             }
         }
-        [HttpPost("{Id}/upload")]
+        [HttpPost("upload/id/{Id}")]
         public async Task<IActionResult> UploadAsync(long Id, IFormFile file)
         {
             try

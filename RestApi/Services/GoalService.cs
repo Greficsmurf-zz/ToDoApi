@@ -96,6 +96,7 @@ namespace RestApi.Services
             await file.CopyToAsync(stream);
             goal.File = stream.ToArray();
             _goalRepository.Update(goal);
+            await _unitOfWork.CompleteAsync();
         }
         public async Task UploadFile(string Name, IFormFile file)
         {
@@ -103,7 +104,6 @@ namespace RestApi.Services
             var stream = new MemoryStream();
             await file.CopyToAsync(stream);
             goal.File = stream.ToArray();
-            goal.Name = "changed";
             _goalRepository.Update(goal);
             await _unitOfWork.CompleteAsync();
         }
