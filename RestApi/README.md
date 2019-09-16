@@ -35,13 +35,13 @@ PUT api/goals/id/{Id} -- обновление задачи по id
 	"CategoryId" : 2
 }
 поля goal: 
-	public long TaskId { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public Byte[] File { get; set; }
-        public DateTime EndDate { get; set; }
-        public long CategoryId { get; set; }
-        public string Status { get; set; }
+	* public long TaskId { get; set; }
+        * public string Name { get; set; }
+        * public string Description { get; set; }
+        * public Byte[] File { get; set; }
+        * public DateTime EndDate { get; set; }
+        * public long CategoryId { get; set; }
+        * public string Status { get; set; }
 
 Категорий 3 по id: 1(High priority),2(Medium priority),3(low priority)
 	
