@@ -28,12 +28,13 @@ PUT api/goals/name/{Name} -- обновление задачи по имени
 PUT api/goals/id/{Id} -- обновление задачи по id
 
 минимальный вид goal: 
-{
-	"Name" : "Task1",
-	"Description" : "task1",
-	"EndDate" : "2020-04-23T18:25:43.511Z",
-	"CategoryId" : 2
-}
+
+* "Name" : "Task1",
+* "Description" : "task1",
+*"EndDate" : "2020-04-23T18:25:43.511Z",
+*"CategoryId" : 2
+
+
 поля goal: 
 * public long TaskId { get; set; }
 * public string Name { get; set; }
