@@ -12,3 +12,6 @@ C:\Users\grefi\source\repos\RestApi\RestApi\obj\Debug\netcoreapp2.2\RestApi.Asse
 C:\Users\grefi\source\repos\RestApi\RestApi\obj\Debug\netcoreapp2.2\RestApi.RazorTargetAssemblyInfo.cache
 C:\Users\grefi\source\repos\RestApi\RestApi\obj\Debug\netcoreapp2.2\RestApi.dll
 C:\Users\grefi\source\repos\RestApi\RestApi\obj\Debug\netcoreapp2.2\RestApi.pdb
+C:\Users\grefi\source\repos\RestApi\RestApi\bin\Debug\netcoreapp2.2\appsettings.Development.json
+C:\Users\grefi\source\repos\RestApi\RestApi\bin\Debug\netcoreapp2.2\appsettings.json
+C:\Users\grefi\source\repos\RestApi\RestApi\bin\Debug\netcoreapp2.2\Properties\launchSettings.json

@@ -62,7 +62,7 @@ namespace RestApi.Migrations
                     b.Property<long>("TaskId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long?>("CategoryId");
+                    b.Property<long>("CategoryId");
 
                     b.Property<string>("Description")
                         .HasMaxLength(1000);
@@ -87,9 +87,10 @@ namespace RestApi.Migrations
 
             modelBuilder.Entity("RestApi.Models.Goal", b =>
                 {
-                    b.HasOne("RestApi.Models.Category", "Category")
+                    b.HasOne("RestApi.Models.Category")
                         .WithMany("Goal")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

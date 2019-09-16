@@ -36,7 +36,7 @@ namespace RestApi.Migrations
                     Description = table.Column<string>(maxLength: 1000, nullable: true),
                     File = table.Column<byte[]>(nullable: true),
                     EndDate = table.Column<DateTime>(nullable: false),
-                    CategoryId = table.Column<long>(nullable: true),
+                    CategoryId = table.Column<long>(nullable: false),
                     Status = table.Column<string>(maxLength: 250, nullable: true)
                 },
                 constraints: table =>
@@ -47,7 +47,7 @@ namespace RestApi.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Category",
                         principalColumn: "CategoryId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
