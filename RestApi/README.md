@@ -31,8 +31,8 @@ PUT api/goals/id/{Id} -- обновление задачи по id
 
 * "Name" : "Task1",
 * "Description" : "task1",
-*"EndDate" : "2020-04-23T18:25:43.511Z",
-*"CategoryId" : 2
+* "EndDate" : "2020-04-23T18:25:43.511Z",
+* "CategoryId" : 2
 
 
 поля goal: 
